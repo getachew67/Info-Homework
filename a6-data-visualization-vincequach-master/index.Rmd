@@ -1,0 +1,54 @@
+---
+title: "Greenhouse Gas Emissions"
+author: "Vince Quach"
+date: "May 1, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.width = 8, fig.height = 3)
+library(knitr)
+source("assignment.R")
+source("analysis.R")
+```
+# Part One
+
+```{r easy graph}
+first_10
+```
+
+### Information
+The plot shows the first ten countries whose names starts with "A" and their CO2 pollution in kilotons, including: `r names` (Aruba, Afghanistan, Angola, Albania, Andorra, United Arab Emirates, Argentina, Armenia, America Samoa, and Antigua & Barbuda). The x-axis contains the countries along with their ISO (world standard) code, and the y-axis contains the CO2 pollution in kilotons in 2014 (or the most recent year that we have data on). Out of the ten countries, eight had a pollution level of under 50 thousand kilotons. Those were: Aruba, Afghanistan, Angola, Albania, Andorra, ARmenia, America Samoa, and Antigua and Barbuda, with the lowest being `r lowest_a_country` (Andorra) with only `r lowest_a_pollution` kilotons of CO2. The two countries that exceeded 50 thousand kilotons were `r highest_a_country` (United Arab Emirtes and Argentina) with `r highest_a_pollution` kilotons of CO2 emission (respectively).
+
+
+```{r hard graph}
+highest_vs_lowest
+```
+
+This plot shows the contrast of pollution (in kilotons) between the five highest polluters and the bottom five polluters--from high to low--in 2014 (or the most recent). The top five were: `r highest_names`(China, USA, India, Russia, and Japan). The bottom five, respectively, were: `r lowest_names` (Tuvalu, Liechtenstein, Nauru, Kiribati, and The Marshall Islands). The discrepancy was so large that the five lowest polluting countries registered as "0" (near zero) on the pollution bar graph because of how insignifant their carbon footprints were. To compare, the country with the highest pollution was `r china` (China) at `r china_pollution` kilotons of CO2 vs the country with the lowest pollution `r tuvalu` (Tuvalu) at `r tuvalu_pollution` kilotons of CO2. That means that `r china` (China) polluted `r difference` times the amount that `r tuvalu` (Tuvalu) did. Crazy!
+
+
+# Part Two
+
+```{r chloroplethic}
+the_world
+```
+
+### Information 
+This map of the world is a choroplethic map (think heat map) of how countries stack up against each other on a visual scale when it comes to CO2 emissions in kilotons in 2014 (or using the most recent data we have). The gradient intuitively has it so that the the less emission a country generates, the lighter the color. It's division seems arbitrary with the breaks at 10:1000, 1000:10,000, 10,000:200,000, 200,000:600,000, and 1,000,000:11,000,000 but this is done purposefully due to the nature of the data. The max value was `r max_kt` kilotons, while the min value was `r min_kt` kilotons of CO2. There are `r kt_countries` countries listed and so if we were to use it by averages then it would make sense to do (`r max_kt` - `r min_kt`) / `r kt_countries` to get our interval size, which in this case is `r interval_size`. However, upon looking at the data we see that there are actually only five countries above one million kilotons and so the outliers skew that averages. Most countries are within the 10,000 - 200,000 range, hence why we couldn't have just taken the difference and found the average.
+
+From the map we see that the US, Russia, China, Japan, and India are the five countries that are over 1,000,000 kt. The rest of the countries in the world fall well below even 600,000 kilotons. 
+
+The Y and X axises represent the geographic coordinate system of Latitude and Longitude (respectively). The key represents the color gradient and what they mean; P stands for pollution and so "10 < P < 1000" means that the countries associated with that color have a CO2 kiloton emission of more than 10 kilotons and less than 1000. The pattern stays consistent through the entire key. 
+
+# Part Three
+
+```{r hoverover}
+world_pc
+```
+
+
+Note: This part takes a while to load and will only load in a browser (worked on Firefox Quantum and Google Chrome, link [here](https://imgur.com/4PC37Og)). When loading your browser may say that the tab is taking a long time to load and will ask you if you want to abort the exection. Please be patient and don't abort it, it will work! Additionally, once it loads the mouseover feature will take a little bit of time before information is displayed; not as much time as it took for the map to load but about <5 seconds. 
+
+#### Information 
+This map of the world seems similar to the one in part two except it analyzes the CO2 emission in the form of metric tons per capita in 2014 (or in the latest year that we have data on). That means that if it says "39" that the average person in that countrie contributes 39 metric tons of CO2 per year. The big difference between this choroplethic map and the previous is that this one has a mouseover feature, where you can hover your cursor over any country to get the name of the country, the ISO-3 country code, along with the pollution information. The gradient here also represents the level of pollution, with darker representing more pollution. The feature supports zoom so that you can close in on a specific continent. 

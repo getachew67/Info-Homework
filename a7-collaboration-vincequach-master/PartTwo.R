@@ -1,0 +1,70 @@
+source("PartOne.R")
+
+survey <- read.csv(file = "data/intro_survey.csv", stringsAsFactors = FALSE)
+
+# Calculates programming experience at each level and makes a table to represent it
+program_5 <- summarize(survey, sum = sum(programming_exp == 5))
+program_4 <- summarize(survey, sum = sum(programming_exp == 4))
+program_3 <- summarize(survey, sum = sum(programming_exp == 3))
+program_2 <- summarize(survey, sum = sum(programming_exp == 2))
+program_1 <- summarize(survey, sum = sum(programming_exp == 1))
+programming_experience <- c("Never coded", "Some coding experimentation", "Some programming experience", "Moderate programming experience", "Lots of programming experience")
+programming_level <- c(program_1, program_2, program_3, program_4, program_5)
+programming <- data.frame(programming_experience, unlist(programming_level), stringsAsFactors = FALSE)
+programming <- rename(programming, "Number of answers" = unlist.programming_level.)
+programming <- rename(programming, "Programming experience" = programming_experience)
+
+# Calculates command line at each level and makes a table to represent it
+cl_3 <- summarize(survey, sum = sum(cli_exp == 3))
+cl_2 <- summarize(survey, sum = sum(cli_exp == 2))
+cl_1 <- summarize(survey, sum = sum(cli_exp == 1))
+cl_0 <- summarize(survey, sum = sum(cli_exp == 0))
+cl_experience <- c("Never used command line", "Used command line a few times", "Intermediate command line user", "Expert command line user")
+cl_level <- c(cl_0, cl_1, cl_2, cl_3)
+command_line <- data.frame(cl_experience, unlist(cl_level), stringsAsFactors = FALSE)
+command_line <- rename(command_line, "Command line experience" = cl_experience)
+command_line <- rename(command_line, "Number of answers" = unlist.cl_level.)
+
+# Calculates version control at each level and makes a table to represent it
+vs_3 <- summarize(survey, sum = sum(vcs_exp == 3))
+vs_2 <- summarize(survey, sum = sum(vcs_exp == 2))
+vs_1 <- summarize(survey, sum = sum(vcs_exp == 1))
+vs_0 <- summarize(survey, sum = sum(vcs_exp == 0))
+vs_experience <- c("Never used version control", "Used version control a few times", "Intermediate version control user", "Expert version control user")
+vs_level <- c(vs_0, vs_1, vs_2, vs_3)
+version_control <- data.frame(vs_experience, unlist(vs_level), stringsAsFactors = FALSE)
+version_control <- rename(version_control, "Version Control (Git/GitHub) experience" = vs_experience)
+version_control <- rename(version_control, "Number of answers" = unlist.vs_level.)
+
+# Calculates markdown experience at each level and makes a table to represent it
+md_3 <- summarize(survey, sum = sum(md_exp == 3))
+md_2 <- summarize(survey, sum = sum(md_exp == 2))
+md_1 <- summarize(survey, sum = sum(md_exp == 1))
+md_0 <- summarize(survey, sum = sum(md_exp == 0))
+md_experience <- c("Never used markdown", "Used markdown a few times", "Intermediate markdown user", "Expert markdown user")
+md_level <- c(md_0, md_1, md_2, md_3)
+markdown <- data.frame(md_experience, unlist(md_level), stringsAsFactors = FALSE)
+markdown <- rename(markdown, "Markdown experience" = md_experience)
+markdown <- rename(markdown, "Number of answers" = unlist.md_level.)
+
+# Calculates r programming experience at each level and makes a table to represent it
+r_3 <- summarize(survey, sum = sum(r_exp == 3))
+r_2 <- summarize(survey, sum = sum(r_exp == 2))
+r_1 <- summarize(survey, sum = sum(r_exp == 1))
+r_0 <- summarize(survey, sum = sum(r_exp == 0))
+r_experience <- c("Never used R", "Used R a few times", "Intermediate R user", "Expert R user")
+r_level <- c(r_0, r_1, r_2, r_3)
+r <- data.frame(r_experience, unlist(r_level), stringsAsFactors = FALSE)
+r <- rename(r, "R (programming) experience" = r_experience)
+r <- rename(r, "Number of answers" = unlist.r_level.)
+
+# Calculates web programming experience at each level and makes a table to represent it
+web_3 <- summarize(survey, sum = sum(web_exp == 3))
+web_2 <- summarize(survey, sum = sum(web_exp == 2))
+web_1 <- summarize(survey, sum = sum(web_exp == 1))
+web_0 <- summarize(survey, sum = sum(web_exp == 0))
+web_experience <- c("Never used web programming", "Used web programming a few times", "Intermediate web programming user", "Expert web programming user")
+web_level <- c(web_0, web_1, web_2, web_3)
+web <- data.frame(web_experience, unlist(web_level), stringsAsFactors = FALSE)
+web <- rename(web, "Web programming experience" = web_experience)
+web <- rename(web, "Number of answers" = unlist.web_level.)

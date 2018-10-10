@@ -1,0 +1,71 @@
+---
+title: "Legislative Data"
+author: "Vince Quach"
+date: "April 24, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE)
+library(dplyr)
+library(knitr)
+library(httr)
+source("assignment.R")
+source("analysis.R")
+topic <- "education"
+representative_id <- rep$member_id
+```
+
+## Part 1
+
+A report on bills proposed by congress concerning any aspect of education for Americans.
+
+```{r table, echo=FALSE, message=FALSE}
+kable(new_most_recent)
+```
+
+- The first column "Unique Identifyer" is each bill's unique ID, taken as the Bill-ID that congress assigned the bill because each bill is unique^1^; it would be unnecessary to come up with a new system. "HR" means that a representative proposed the bill (HR for House of Representatives), and "S" means that a senator proposed the bill.
+
+- The second column "Bill Name" is the name that was assigned to the bill for common parlance.
+
+- The third column "Legislator" is the name(s) of the legislator who proposed the bill; the proposal process comes from the legislator (a state representative or senator) doing what their consituents asked them to do since they represent their district/state. The following two letters represent the state that they represent, and the "R" or "D" represent whether or not they are a Republican or Democrat.
+
+- The fourth column "Current status" returns a TRUE or FALSE value that represents whether or not a bill is active, meaning that it was enacted. If TRUE then it means that it is currently a law, otherwise it failed to get enough votes in congress or got vetoe'd by the President.
+
+- The fifth column "More Information" provides a hyperlink for each respective bill if you want to learn more!
+
+## Part 2
+
+```{r bill description, echo=FALSE}
+my_bill <- "hr2407-114"
+bill_title <- filter(recent_education_bills, bill_id == my_bill) %>%
+   select(short_title)
+bill_sponsor <- filter(recent_education_bills, bill_id == my_bill) %>%
+   select(sponsor_name)
+```
+#### My bill, bill `r my_bill` is called `r bill_title`, sponsored by `r bill_sponsor`. To see the full text, visit [here](https://www.govtrack.us/congress/bills/114/hr2407/text).
+
+In short, the bill is intended to get public school students to drink more milk! Currently the guidelines that legislation have provided states that every student should drink at *least* three cups (1 cup = 8 fluid ounces) of milk; the scary reality is that students are only drinking half as much as they are recommended. This is bad because milk provides these growing bodies with vitamin D, calcium, and potassium, all of which are essential to growth.
+
+This bill also sets guidelines for milk substitutions for those who are unable to drink milk due to health, religious, or ethical reasons. The substitute may be given but must be nutritionally equivalent to a low-fat cup of milk. That means that it needs to have enough: calcium, protein, vitamin A, vitamin D, magnesium, phosphorus, potassium, riboflavin, and vitamin B-12. Substitutions that school districts implement must be notified to the state agency that's in charge of milk. 
+
+I do think that this bill should become a law. Milk is the foundation of every delicious breakfast--oatmeal with water: wack, but oatmeal with milk: not wack. Additionally, my parents are both short but I'm average and that's all thanks to milk providing me with the nutrition I needed to become strong and ~~tall~~ average.
+
+Actionwise, the bill hasn't been enacted into a law yet. The last vote was to refer it to the subcommittee on Early Childhood, Elementary, and Secondary Education for further revision.
+
+## Part 3
+
+`r member$role` `r rep$first_name` `r rep$last_name` (`r rep$current_party`) is a Congressman in the 115th Congresional Year. They can be contacted on Twitter at @`r rep$twitter_account`, on Facebook at `r rep$facebook_account`. (No phone listed)
+
+The twenty most recent bills that they have most recently sponsored and cosponsored can be found on the following table.
+
+```{r representative sponsored and cosponsored, echo=FALSE}
+kable(sponsored_and_cosponsored)
+```
+
+In the most recent twenty bills that have been voted on in the House of Representatives, `r rep$first_name` `r rep$last_name` has voted in agreement the opposite party (`r opposite_party`) `r matching_percentage`% of the time (`r matching_votes` votes in aggreement out of `r nrow(all_votes)` total bills).
+
+References:
+-----------
+
+^1^ [About Bills, Resolutions, and Laws](https://www.lexisnexis.com/help/CU/Serial_Set/About_Bills.htm)

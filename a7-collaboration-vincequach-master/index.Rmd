@@ -1,0 +1,95 @@
+---
+title: "Introductory Survey Data"
+author: "Corina Geier, Vince Quach, Jensen Anderson, Ellie Qian (Team AA4)"
+date: "May 8, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+survey <- read.csv(file = "data/intro_survey.csv", stringsAsFactors = FALSE)
+library("knitr")
+source("PartOne.R")
+source("PartTwo.R")
+#source("PartFour.R")
+```
+
+This report pertains to the information that students filled out at the beginning of the quarter upon answering the introduction survey. It specifically details the technical experience that students had coming into Info 201. The survey asked students about their prior experiences with general programming (Java, Python, C etc.) but then also asked students about their prior experiences in working with the command line, version control, R language, and web programming (html). Provided in this report are not only verbal writeups but also in the form of tables and visualized charts. 
+
+# Summary Statistics
+
+This section contains statistics that summarize data from a class survey. It includes information about people's programming experience as well as information about people's personal backgrounds.
+
+In an introductory class survey assessing people's programming experience the average programming experience people listed on a scale of 1 to 5 was a `r average_programming_exp`. The percent of people who listed that they were an "intermediate user" of Command-Line was `r percent_int_of_cl_exp`%. The percent of people that listed that they had never used Command-Line was `r percent_no_cl_exp`%. The percent of people who listed that they were an "intermediate user" of Version control was `r percent_int_of_vcs_exp`%. The percent of people who listed that they had never used Version control was `r percent_no_vcs_exp`%. Intermediate users of Markdown was listed at `r percent_int_of_md_exp`% and the people who had never used Markdown was listed at `r percent_no_md_exp`%. Intermediate users of R language was listed at `r percent_int_of_r_exp`% and people who had never used R was listed at `r percent_no_r_exp`%. The percent of people who had intermediate experience working with Web programming was `r percent_int_of_web_exp`% and those with no experience with Web programming was listed at `r percent_no_web_exp`%. 
+The maximum amount of coffee drinks someone in the class drank on a daily basis was `r max_coffee_drinks`, and the minimum amount of coffee drinks someone in the class drank on a daily basis was `r min_coffee_drinks`. Of the people in the class that responded to the survery, `r percent_born_in_wa`% of people were born in Washington.
+
+
+# Response Statistic Level 
+
+### This section contains tables representing the breakdown of how much technical experience students came into Info 201 with. It was summarized in words by the previous section but these tables are to accompany those numbers in a visual manner. 
+
+#### The first table represents the breakdown of students' experiences with programming in general
+```{r programming table}
+kable(programming)
+```
+
+#### This second table represents the breakdown of students' experiences with command line.
+```{r command line table}
+kable(command_line)
+```
+
+#### This third table represents the breakdown of students' experiences with version control (like git or GitHub).
+```{r version control table}
+kable(version_control)
+```
+
+#### The next table represents the breakdown of students' experiences with markdown programming.
+```{r markdown table}
+kable(markdown)
+```
+
+#### The following table represents the breakdown of students' experiences with programming in R language.
+```{r r table}
+kable(r)
+```
+
+#### The last table represents the breakdown of students' experiences with web programming (like html).
+```{r html table}
+kable(web)
+```
+
+So by the data, the students coming into Info 201 were beginners in programming. The distritubion of general programming knowledge was at a moderate level but that is most likely due to the fact that many students take the CSE14X series before or in tandem with taking 201. The rest of the technical information--markdown, web programming, R--was relatively new for most students. 
+
+# First Visualization
+This section examines the technical experience of the survey respondants. It is a basic graphic to illustrate how proficient the takers of the survey are with two particular elements of technology. 
+
+```{r vis_one_first_graph, echo=FALSE}
+prog_exp_graph
+```
+
+This first visualization displays the programming experience of those who took the survey on a scale from 1 to 5, with 4 being the most popular. Additionally, the graph contains points to represent how proficient the groups were with version control. The lighter the shade, the more familiar they were. The dots are enlarged and on a x10 scale with the numbers on the bottom of the chart. 
+
+```{r vis_two_second_graph, echo=FALSE}
+vcs_graph
+```
+
+This second graph simply displays the population by proficiency with version control and no other elements. Most of the population has little to no experience, and a small portion has a mid-range level of experience on a scale of 1-3. 
+
+
+# Second Visualization
+
+This section will explore the relationships between technical experience with two other features that are not commonly linked with technical experience. The features of choice are coffee consumption and pet preference. The first graph will show whether coffee consumption is associated with people's experience with r language and web programming. The second graph looks at among people with more programming experience, what pets do they usually prefer. 
+
+```{r first_graph, echo=FALSE}
+coffee_programming
+```
+
+As shown above, coffee consumption is not linked with either r experience or web programming experience. Their relationship is very inconsistent, meaning that r or web programming expeirence does not increase or decrease with an increase in coffee consumption. There was, however, a peak in web programming experience for people who drink `r top_prog_coffee` a day.
+
+
+```{r second_graph, echo=FALSE}
+pet_pref_programming
+```
+
+Graph two shows that among all levels of experience with programming, people have stronger preference for dogs. Group 4 (I have moderate experience with a programming language. CSE 143, for example) has the biggest number of dog lovers of `r max_dog_lover`
+
